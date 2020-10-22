@@ -79,8 +79,7 @@ Node* InsertNewNode(City newCity, Node* pNext)
     Node *pNode = malloc(sizeof(Node));
     pNode->city = newCity;
     pNode->pNext = pNext;
-    pNext = pNode;
-    return pNext;
+    return pNode;
 }
 
 #ifdef CHALLENGE2
