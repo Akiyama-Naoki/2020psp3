@@ -128,14 +128,10 @@ l.147　次の要素にアクセス
 42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
 print list. items = 21
 ===== Print End =====
-City ID?42204
-the city was found at 17
-42204, NagasakiKen, Isahaya, 138078, 65029, 73049
-City Name?Isahaya
-the city was found at 17
-42204, NagasakiKen, Isahaya, 138078, 65029, 73049
-===== Start Printing =====
+City ID?42411
+the city was found at 0
 42411, NagasakiKen, ShinKamigoto, 19718, 9197, 10521
+===== Start Printing =====
 42391, NagasakiKen, Sasa, 13626, 6426, 7200
 42383, NagasakiKen, Ojika, 2560, 1172, 1388
 42323, NagasakiKen, Hasami, 14891, 7079, 7812
@@ -152,6 +148,7 @@ the city was found at 17
 42208, NagasakiKen, Matsuura, 23309, 11164, 12145
 42207, NagasakiKen, Hirado, 31920, 14874, 17046
 42205, NagasakiKen, Omura, 92757, 43938, 48819
+42204, NagasakiKen, Isahaya, 138078, 65029, 73049
 42203, NagasakiKen, Shimabara, 45436, 20999, 24437
 42202, NagasakiKen, Sasebo, 255439, 120198, 135241
 42201, NagasakiKen, Nagasaki, 429508, 198716, 230792
@@ -161,4 +158,7 @@ free list. items = 20
 ```
 
 ## 修正履歴
-
+int DeleteNodeAt(Node** ppNode, int cn)を変更
+l.102~107　削除する要素を探して、削除する要素の1つ前の要素のリンクと１つ後ろの要素のデータを繋げる。
+l.109~110　次の要素にアクセス
+l.115　リストの解放

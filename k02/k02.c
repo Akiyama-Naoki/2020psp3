@@ -79,7 +79,7 @@ Node* InsertNewNode(City newCity, Node* pNext)
     Node *pNode = malloc(sizeof(Node));
     pNode->city = newCity;
     pNode->pNext = pNext;
-    
+
     return pNode;
 }
 
@@ -89,20 +89,30 @@ int DeleteNodeAt(Node** ppNode, int cn)
     //  チャレンジ問題1
     //  ここを実装する
     int pos,result;
-    Node *pNode;
-    Node *pPrev;
+    Node tmp;
+    tmp.pNext = *ppNode;
+    Node *pPrev = &tmp;
+    Node *pCurrent = *ppNode;
     result = ERROR;
-    pNode = *ppNode;
+    pos = 0;
 
-    for(pos = 0; pos < MAX_CITY; pos++)
-    {
+    
+    while(pCurrent != NULL)
+    {        
         if(cn == pos){
-            pPrev->pNext = pNode->pNext;
+            pPrev->pNext = pCurrent->pNext;
+            *ppNode = tmp.pNext;
             result = SUCCESS;
             break;
         }
-        pPrev = pNode;
-        pNode = pNode->pNext;
+
+        pPrev = pCurrent;
+        pCurrent = pCurrent->pNext;
+        pos++;
+    }
+
+    if(result == SUCCESS){
+       free(pCurrent); 
     }
     
     return result;
