@@ -76,31 +76,88 @@ void PrintList(Node* pTop)
 Node* InsertNewNode(City newCity, Node* pNext)
 {
     //  ここを実装する
+    Node *pNode = malloc(sizeof(Node));
+    pNode->city = newCity;
+    pNode->pNext = pNext;
 
+    return pNode;
 }
 
-#ifdef CHALLENGE1
+#ifdef CHALLENGE2
 int DeleteNodeAt(Node** ppNode, int cn)
 {
     //  チャレンジ問題1
     //  ここを実装する
+    int pos,result;
+    Node tmp;
+    tmp.pNext = *ppNode;
+    Node *pPrev = &tmp;
+    Node *pCurrent = *ppNode;
+    result = ERROR;
+    pos = 0;
 
+    
+    while(pCurrent != NULL)
+    {        
+        if(cn == pos){
+            pPrev->pNext = pCurrent->pNext;
+            *ppNode = tmp.pNext;
+            result = SUCCESS;
+            break;
+        }
+
+        pPrev = pCurrent;
+        pCurrent = pCurrent->pNext;
+        pos++;
+    }
+
+    if(result == SUCCESS){
+       free(pCurrent); 
+    }
+    
+    return result;
 }
 #endif
 
-#ifdef CHALLENGE2
+#ifdef CHALLENGE1
 int SearchCityByName(Node* pList, char* cityName, City* pCity)
 {
     //  チャレンジ問題2
     //  ここを実装する
+    int result, pos;
+    result = -1;  
 
+    for(pos = 0; pos < MAX_CITY; pos++){
+        if(strcmp(cityName,pList->city.name) == 0){
+            *pCity = pList->city;
+            result = pos;
+            break;
+        }
+        
+        pList = pList->pNext;
+    }
+
+    return result;
 }
 #endif
 
 int SearchCityByID(Node* pList, int ID, City* pCity)
 {
     // ここを実装する
+    int result, pos;
+    result = -1;  
 
+    for(pos = 0; pos < MAX_CITY; pos++){
+        if(ID == pList->city.id){
+            *pCity = pList->city;
+            result = pos;
+            break;
+        }
+        
+        pList = pList->pNext;
+    }
+
+    return result;
 }
 
 int main(void)
@@ -109,7 +166,7 @@ int main(void)
     FILE* fp;
     int key;
 
-    fp = fopen("nagasaki.csv","r");
+    fp = fopen("nagasaki2.csv","r");
     if(fp==NULL){
         fputs("File open error\n",stderr);
         exit(EXIT_FAILURE);
