@@ -58,27 +58,16 @@ char* BMSearch(char text[], char key[])
      
     for(index = key_len - 1; index < text_len;){
         cn = 0;
-        for(pos = key_len - 1; pos > 0; cn++){
-            if(text[index - cn] == key[pos]){
+        for(pos = key_len - 1; pos >= 0; pos--){
+            if(text[index + cn] == key[pos]){
                 pos--;
             }else{
-                for(i = 0; i < key_len; i++){
-                    if(text[index - cn] == key[i]){
-                        index += table[i];
-                        break;
-                    }
-                    if(i == key_len - 1){
-                        index += table[(unsigned char)text[index - cn]];
-                        break;
-                    }
-                    
-                }
+               index = index - cn + table[(unsigned char)text[index - cn]]        
                break;
             }
             
         }
         
-
         if(pos == 0){
             result = &text[index - cn];
             break;
