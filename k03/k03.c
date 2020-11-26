@@ -51,32 +51,31 @@ char* BMSearch(char text[], char key[])
     for(i = 0; i < 256; i++){
         table[i] = 4;
     }
-    table['w'] = 1;
-    table['i'] = 2;
-    table['n'] = 3;
-    table['d'] = 0;
+    for(i = 0; i < key_len; i++){
+        table[i] = key_len - i - 1;
+    }
+  
      
     for(index = key_len - 1; index < text_len;){
         cn = 0;
         for(pos = key_len - 1; pos > 0; cn++){
             if(text[index - cn] == key[pos]){
                 pos--;
-            }else if(text[index - cn] == 'w'){
-                index += table['w'];
-                break;
-            }else if(text[index - cn] == 'i'){
-                index += table['i'];
-                break;
-            }else if(text[index - cn] == 'n'){
-                index += table['n'];
-                break;
-            }else if(text[index - cn] == 'd'){
-                index += table['d'];
-                break;
             }else{
-                index = index + table[index - cn];
-                break;
-            } 
+                for(i = 0; i < key_len; i++){
+                    if(text[index - cn] == key[i]){
+                        index += table[i];
+                        break;
+                    }
+                    if(i == key_len - 1){
+                        index += table[(unsigned char)text[index - cn]];
+                        break;
+                    }
+                    
+                }
+               break;
+            }
+            
         }
         
 
