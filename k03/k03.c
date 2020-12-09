@@ -63,7 +63,7 @@ char* BMSearch(char text[], char key[])
                 pos--;
             }else{
                newindex = index - cn + table[(unsigned char)text[index - cn]];        
-               if(newindex <= index - cn){
+               if(newindex <= index){
                     index = index + 1; 
                 }else{
                     index = newindex;
